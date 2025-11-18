@@ -1,12 +1,14 @@
-import { getWinTotals, getWinStats } from '@/lib/actions/win-actions'
+import { getWinTotals, getWinStats, getWinTrends } from '@/lib/actions/win-actions'
 import WinCounter from '@/components/WinCounter'
 import StatsBoard from '@/components/StatsBoard'
+import WinTrendGraph from '@/components/WinTrendGraph'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
     const totals = await getWinTotals()
     const stats = await getWinStats()
+    const trends = await getWinTrends()
 
     return (
         <main style={{
@@ -32,7 +34,7 @@ export default async function Home() {
                         backgroundClip: 'text',
                         marginBottom: '0.5rem',
                     }}>
-                        Foosball Championship
+                        🏆 Foosball - Widen the Gap 🏆
                     </h1>
                     <p style={{
                         fontSize: '1.125rem',
@@ -44,6 +46,11 @@ export default async function Home() {
 
                 {/* Win Counter */}
                 <WinCounter initialTotals={totals} />
+
+                {/* Win Trend Graph */}
+                <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+                    <WinTrendGraph trends={trends} />
+                </div>
 
                 {/* Stats Dashboard */}
                 <StatsBoard stats={stats} />

@@ -191,9 +191,9 @@ function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecremen
                     style={{
                         background: 'var(--bg-tertiary)',
                         color: 'var(--text-primary)',
-                        width: '60px',
-                        height: '60px',
-                        fontSize: '2rem',
+                        width: '80px',
+                        height: '80px',
+                        fontSize: '2.5rem',
                         borderRadius: '50%',
                         display: 'flex',
                         alignItems: 'center',
@@ -202,7 +202,7 @@ function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecremen
                         cursor: loading ? 'not-allowed' : 'pointer',
                     }}
                 >
-                    −
+                    -
                 </button>
                 <button
                     onClick={onIncrement}

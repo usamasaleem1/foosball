@@ -80,3 +80,35 @@ export async function getWinStats() {
         recentGames: history.slice(0, 10)
     }
 }
+
+export async function getWinTrends(days: number = 30) {
+    const { data, error } = await supabase
+        .from('wins')
+        .select('*')
+        .order('created_at', { ascending: true })
+
+    if (error) {
+        console.error('Error fetching win trends:', error)
+        return []
+    }
+
+    // Calculate cumulative wins over time
+    let usamaTotal = 0
+    let nicholasTotal = 0
+
+    const trends = data.map(win => {
+        if (win.player === 'Usama') {
+            usamaTotal += win.delta
+        } else {
+            nicholasTotal += win.delta
+        }
+
+        return {
+            timestamp: win.created_at,
+            Usama: usamaTotal,
+            Nicholas: nicholasTotal
+        }
+    })
+
+    return trends
+}
