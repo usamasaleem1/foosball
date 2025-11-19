@@ -83,7 +83,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
         }
 
         // Draw Usama's line
-        ctx.strokeStyle = '#667eea'
+        ctx.strokeStyle = '#00d9ff'
         ctx.lineWidth = 3
         ctx.beginPath()
         trends.forEach((trend, index) => {
@@ -98,7 +98,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
         ctx.stroke()
 
         // Draw Usama's points
-        ctx.fillStyle = '#667eea'
+        ctx.fillStyle = '#00d9ff'
         trends.forEach((trend, index) => {
             const x = xScale(index)
             const y = yScale(trend.Usama)
@@ -108,7 +108,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
         })
 
         // Draw Nicholas's line
-        ctx.strokeStyle = '#f093fb'
+        ctx.strokeStyle = '#ff0080'
         ctx.lineWidth = 3
         ctx.beginPath()
         trends.forEach((trend, index) => {
@@ -123,7 +123,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
         ctx.stroke()
 
         // Draw Nicholas's points
-        ctx.fillStyle = '#f093fb'
+        ctx.fillStyle = '#ff0080'
         trends.forEach((trend, index) => {
             const x = xScale(index)
             const y = yScale(trend.Nicholas)
@@ -151,11 +151,11 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
         ctx.font = '14px Inter, sans-serif'
         ctx.textAlign = 'left'
 
-        ctx.fillStyle = '#667eea'
+        ctx.fillStyle = '#00d9ff'
         ctx.fillRect(padding.left, legendY, 20, 3)
         ctx.fillText('Usama', padding.left + 25, legendY + 4)
 
-        ctx.fillStyle = '#f093fb'
+        ctx.fillStyle = '#ff0080'
         ctx.fillRect(padding.left + 100, legendY, 20, 3)
         ctx.fillText('Nicholas', padding.left + 125, legendY + 4)
 
@@ -187,7 +187,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
 
     if (trends.length === 0) {
         return (
-            <div className="glass animate-fade-in" style={{
+            <div className="card animate-fade-in" style={{
                 padding: '2rem',
             }}>
                 <h3 style={{
@@ -209,7 +209,7 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
     }
 
     return (
-        <div className="glass animate-fade-in" style={{
+        <div className="card animate-fade-in" style={{
             padding: '2rem',
             position: 'relative',
         }}>
@@ -264,13 +264,13 @@ export default function WinTrendGraph({ trends }: WinTrendGraphProps) {
                             gap: '0.25rem',
                         }}>
                             <div style={{
-                                color: '#667eea',
+                                color: '#00d9ff',
                                 fontWeight: '600',
                             }}>
                                 Usama: {hoveredPoint.data.Usama}
                             </div>
                             <div style={{
-                                color: '#f093fb',
+                                color: '#ff0080',
                                 fontWeight: '600',
                             }}>
                                 Nicholas: {hoveredPoint.data.Nicholas}

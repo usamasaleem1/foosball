@@ -76,8 +76,6 @@ export default function WinCounter({ initialTotals }: WinCounterProps) {
                     name="Usama"
                     wins={totals.Usama}
                     color="var(--accent-usama)"
-                    gradient="var(--gradient-usama)"
-                    glow="var(--shadow-glow-usama)"
                     onIncrement={() => handleWin('Usama', 1)}
                     onDecrement={() => handleWin('Usama', -1)}
                     loading={loading?.startsWith('Usama') || false}
@@ -88,8 +86,6 @@ export default function WinCounter({ initialTotals }: WinCounterProps) {
                     name="Nicholas"
                     wins={totals.Nicholas}
                     color="var(--accent-nicholas)"
-                    gradient="var(--gradient-nicholas)"
-                    glow="var(--shadow-glow-nicholas)"
                     onIncrement={() => handleWin('Nicholas', 1)}
                     onDecrement={() => handleWin('Nicholas', -1)}
                     loading={loading?.startsWith('Nicholas') || false}
@@ -106,11 +102,12 @@ export default function WinCounter({ initialTotals }: WinCounterProps) {
                     <div style={{
                         display: 'inline-block',
                         padding: '0.75rem 2rem',
-                        background: totals.Usama > totals.Nicholas ? 'var(--gradient-usama)' : 'var(--gradient-nicholas)',
-                        borderRadius: 'var(--radius-xl)',
+                        background: 'var(--bg-secondary)',
+                        border: `2px solid ${totals.Usama > totals.Nicholas ? 'var(--accent-usama)' : 'var(--accent-nicholas)'}`,
+                        borderRadius: 'var(--radius-md)',
                         fontSize: '1.25rem',
-                        fontWeight: '700',
-                        boxShadow: totals.Usama > totals.Nicholas ? 'var(--shadow-glow-usama)' : 'var(--shadow-glow-nicholas)',
+                        fontWeight: '600',
+                        color: totals.Usama > totals.Nicholas ? 'var(--accent-usama)' : 'var(--accent-nicholas)',
                     }}>
                         🏆 {totals.Usama > totals.Nicholas ? 'Usama' : 'Nicholas'} is leading by {Math.abs(totals.Usama - totals.Nicholas)}!
                     </div>
@@ -124,42 +121,25 @@ type PlayerCardProps = {
     name: string
     wins: number
     color: string
-    gradient: string
-    glow: string
     onIncrement: () => void
     onDecrement: () => void
     loading: boolean
 }
 
-function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecrement, loading }: PlayerCardProps) {
+function PlayerCard({ name, wins, color, onIncrement, onDecrement, loading }: PlayerCardProps) {
     return (
-        <div className="glass" style={{
+        <div className="card" style={{
             padding: '2rem',
             textAlign: 'center',
             position: 'relative',
-            overflow: 'hidden',
-            transition: 'all 0.3s ease',
+            transition: 'all 0.15s ease',
         }}>
-            {/* Glow effect */}
-            <div style={{
-                position: 'absolute',
-                top: '-50%',
-                left: '-50%',
-                width: '200%',
-                height: '200%',
-                background: `radial-gradient(circle, ${color}15 0%, transparent 70%)`,
-                pointerEvents: 'none',
-            }} />
-
             {/* Player Name */}
             <h2 style={{
                 fontSize: '2rem',
-                fontWeight: '700',
+                fontWeight: '600',
                 marginBottom: '1rem',
-                background: gradient,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: color,
             }}>
                 {name}
             </h2>
@@ -167,13 +147,12 @@ function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecremen
             {/* Win Count */}
             <div style={{
                 fontSize: 'clamp(4rem, 10vw, 6rem)',
-                fontWeight: '900',
+                fontWeight: '700',
                 lineHeight: '1',
                 marginBottom: '2rem',
                 color: color,
-                textShadow: glow,
-                transition: 'transform 0.3s ease',
-                transform: loading ? 'scale(1.1)' : 'scale(1)',
+                transition: 'transform 0.15s ease',
+                transform: loading ? 'scale(1.05)' : 'scale(1)',
             }}>
                 {wins}
             </div>
@@ -190,11 +169,11 @@ function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecremen
                     className="btn"
                     style={{
                         background: 'var(--bg-tertiary)',
-                        color: 'var(--text-primary)',
+                        color: 'var(--text-secondary)',
                         width: '80px',
                         height: '80px',
                         fontSize: '2.5rem',
-                        borderRadius: '50%',
+                        borderRadius: 'var(--radius-md)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -209,18 +188,19 @@ function PlayerCard({ name, wins, color, gradient, glow, onIncrement, onDecremen
                     disabled={loading}
                     className="btn"
                     style={{
-                        background: gradient,
-                        color: 'white',
+                        background: color,
+                        color: '#000',
                         width: '80px',
                         height: '80px',
                         fontSize: '2.5rem',
-                        borderRadius: '50%',
+                        borderRadius: 'var(--radius-md)',
+                        border: 'none',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: glow,
                         opacity: loading ? 0.5 : 1,
                         cursor: loading ? 'not-allowed' : 'pointer',
+                        fontWeight: '700',
                     }}
                 >
                     +

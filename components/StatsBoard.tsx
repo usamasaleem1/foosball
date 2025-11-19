@@ -27,7 +27,7 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
             gap: '2rem',
         }}>
             {/* Win Percentage Bar */}
-            <div className="glass animate-fade-in" style={{
+            <div className="card animate-fade-in" style={{
                 padding: '2rem',
             }}>
                 <h3 style={{
@@ -42,30 +42,33 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
                 <div style={{
                     display: 'flex',
                     height: '60px',
-                    borderRadius: 'var(--radius-lg)',
+                    borderRadius: 'var(--radius-md)',
                     overflow: 'hidden',
                     marginBottom: '1rem',
+                    border: '1px solid var(--border-color)',
                 }}>
                     <div style={{
                         width: `${usamaPercentage}%`,
-                        background: 'var(--gradient-usama)',
+                        background: 'var(--accent-usama)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '1.25rem',
-                        fontWeight: '700',
+                        fontWeight: '600',
+                        color: '#000',
                         transition: 'width 0.5s ease',
                     }}>
                         {usamaPercentage.toFixed(1)}%
                     </div>
                     <div style={{
                         width: `${nicholasPercentage}%`,
-                        background: 'var(--gradient-nicholas)',
+                        background: 'var(--accent-nicholas)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '1.25rem',
-                        fontWeight: '700',
+                        fontWeight: '600',
+                        color: '#000',
                         transition: 'width 0.5s ease',
                     }}>
                         {nicholasPercentage.toFixed(1)}%
@@ -85,7 +88,7 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
             </div>
 
             {/* Recent Games */}
-            <div className="glass animate-fade-in" style={{
+            <div className="card animate-fade-in" style={{
                 padding: '2rem',
             }}>
                 <h3 style={{
@@ -131,8 +134,8 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
                                     <div style={{
                                         width: '40px',
                                         height: '40px',
-                                        borderRadius: '50%',
-                                        background: game.player === 'Usama' ? 'var(--gradient-usama)' : 'var(--gradient-nicholas)',
+                                        borderRadius: 'var(--radius-sm)',
+                                        background: game.player === 'Usama' ? 'var(--accent-usama)' : 'var(--accent-nicholas)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -174,7 +177,7 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
 
             {/* Daily Stats */}
             {Object.keys(dailyWins).length > 0 && (
-                <div className="glass animate-fade-in" style={{
+                <div className="card animate-fade-in" style={{
                     padding: '2rem',
                 }}>
                     <h3 style={{

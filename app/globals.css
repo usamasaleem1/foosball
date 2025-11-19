@@ -1,46 +1,39 @@
 :root {
-  /* Color Palette - Vibrant Dark Mode */
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #14141f;
-  --bg-tertiary: #1e1e2e;
-  
-  --accent-usama: #00d4ff;
-  --accent-usama-glow: rgba(0, 212, 255, 0.3);
-  --accent-nicholas: #ff3366;
-  --accent-nicholas-glow: rgba(255, 51, 102, 0.3);
-  
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0b8;
-  --text-muted: #6b6b80;
-  
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-usama: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-  --gradient-nicholas: linear-gradient(135deg, #ff3366 0%, #cc0044 100%);
-  
+  /* Color Palette - Dark Brutalist (Vercel-inspired) */
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+
+  --accent-usama: #00d9ff;
+  --accent-usama-dark: #0099cc;
+  --accent-nicholas: #ff0080;
+  --accent-nicholas-dark: #cc0066;
+
+  --text-primary: #ededed;
+  --text-secondary: #888888;
+  --text-muted: #666666;
+
+  --border-color: #333333;
+  --border-subtle: #222222;
+  --border-accent: rgba(255, 255, 255, 0.1);
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
-  
-  /* Border Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-glow-usama: 0 0 40px var(--accent-usama-glow);
-  --shadow-glow-nicholas: 0 0 40px var(--accent-nicholas-glow);
+
+  /* Border Radius - Brutalist (Sharp) */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Shadows - Minimal */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -63,52 +56,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glass morphism utility */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
+/* Card/Surface utility */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
 }
 
 /* Button base styles */
 .btn {
   padding: var(--spacing-sm) var(--spacing-md);
-  border: none;
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.15s ease;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .btn:hover {
-  transform: translateY(-2px);
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
 }
 
 .btn:active {
   transform: translateY(0);
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.btn:active::before {
-  width: 300px;
-  height: 300px;
 }
 
 /* Animations */
@@ -117,6 +91,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -124,9 +99,12 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -137,6 +115,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
