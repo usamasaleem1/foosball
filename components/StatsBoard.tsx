@@ -20,7 +20,6 @@ export default function StatsBoard({ stats }: StatsBoardProps) {
     const totalGames = totals.Usama + totals.Nicholas
     const usamaPercentage = totalGames > 0 ? (totals.Usama / totalGames) * 100 : 50
     const nicholasPercentage = totalGames > 0 ? (totals.Nicholas / totalGames) * 100 : 50
-
     return (
         <div style={{
             display: 'grid',
