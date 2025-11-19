@@ -1,4 +1,4 @@
-import { getWinTotals, getWinStats, getWinTrends } from '@/lib/actions/win-actions'
+import { getWinTotals, getWinStats, getWinTrends, getTrendTitle } from '@/lib/actions/win-actions'
 import WinCounter from '@/components/WinCounter'
 import StatsBoard from '@/components/StatsBoard'
 import WinTrendGraph from '@/components/WinTrendGraph'
@@ -10,6 +10,7 @@ export default async function Home() {
     const totals = await getWinTotals()
     const stats = await getWinStats()
     const trends = await getWinTrends()
+    const title = await getTrendTitle()
 
     return (
         <PasswordGate>
@@ -36,7 +37,7 @@ export default async function Home() {
                             marginBottom: '0.5rem',
                             letterSpacing: '-0.02em',
                         }}>
-                            🏆 Widen the Gap 🏆
+                            {title}
                         </h1>
                         <p style={{
                             fontSize: '1.125rem',

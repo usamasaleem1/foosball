@@ -112,3 +112,56 @@ export async function getWinTrends(days: number = 30) {
 
     return trends
 }
+
+export async function getTrendTitle() {
+    const stats = await getWinStats()
+    const { totals, recentGames } = stats
+
+    // Get actual wins (only count delta = 1, ignore undos)
+    const actualGames = recentGames.filter(g => g.delta > 0)
+
+    // Need at least 5 games to determine trend
+    if (actualGames.length < 5) {
+        return '🏆 Widen the Gap 🏆'
+    }
+
+    // Calculate last 5 games win rate
+    const last5 = actualGames.slice(0, 5)
+    const last5Usama = last5.filter(g => g.player === 'Usama').length
+    const last5Nicholas = last5.filter(g => g.player === 'Nicholas').length
+
+    // Calculate overall win rate
+    const totalGames = totals.Usama + totals.Nicholas
+    if (totalGames === 0) {
+        return '🏆 Widen the Gap 🏆'
+    }
+
+    const usamaOverallRate = totals.Usama / totalGames
+    const last5UsamaRate = last5Usama / 5
+
+    // Determine who's currently leading
+    const usamaLeading = totals.Usama > totals.Nicholas
+    const leadingPlayer = usamaLeading ? 'Usama' : 'Nicholas'
+
+    // Check if it's a very close battle (within 3 wins)
+    const gap = Math.abs(totals.Usama - totals.Nicholas)
+    if (gap <= 3) {
+        return '⚔️ Head to Head Battle ⚔️'
+    }
+
+    // Calculate if recent trend is widening or tightening
+    const recentTrendFavorsUsama = last5UsamaRate >= 0.6 // 3+ of last 5
+
+    // Gap is widening if leader is winning most recent games
+    if ((usamaLeading && recentTrendFavorsUsama) || (!usamaLeading && !recentTrendFavorsUsama)) {
+        return `📈 The Gap is Getting Bigger 📈`
+    }
+
+    // Gap is tightening if trailing player is winning recent games
+    if ((usamaLeading && !recentTrendFavorsUsama) || (!usamaLeading && recentTrendFavorsUsama)) {
+        return `📉 The Gap is Tightening 📉`
+    }
+
+    // Default fallback
+    return '🏆 Widen the Gap 🏆'
+}
